@@ -15,3 +15,4 @@ use App\Http\Controllers\unsplashController;
 */
 
 Route::get('/', [unsplashController::class,'images'])->name('images');
+Route::post('/recherche', [unsplashController::class,'recherche'])->name('recherche');

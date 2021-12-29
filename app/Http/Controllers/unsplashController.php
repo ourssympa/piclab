@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Facade\FlareClient\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\VarDumper\Cloner\Data;
@@ -14,7 +15,17 @@ class unsplashController extends Controller
         //secret key UYBfLLZ8Yhk9Hl8mDvSZting-83PEcbXflksKehlNpE
         $reponse = Http::get("https://api.unsplash.com/photos?per_page=33&client_id=ooLFilCgZkEudk9UkkUrX2fFCqNEJqwF4px59Prw3Zg");
         $te=json_decode($reponse->getBody(), true);
-        return View('landing',compact('te'));
+        $title="ACCUEIL";
+        return View('landing',compact('te','title'));
+
+    }
+
+    public function recherche(Request $request){
+
+        $reponse = Http::get("https://api.unsplash.com/search/photos?per_page=33&query=.$request->recherche.&client_id=ooLFilCgZkEudk9UkkUrX2fFCqNEJqwF4px59Prw3Zg");
+        $te=json_decode($reponse->getBody(), true);
+        $recherche=$request->recherche;
+        return View('recherchepage',compact('te','recherche'));
 
     }
 }
