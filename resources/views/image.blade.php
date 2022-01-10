@@ -1,11 +1,21 @@
 @extends("layout.defaultlayout")
 
 @section('section')
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+
+@endif
 <div class="section-2xl bg-dark">
   <div class="container">
     <div class="row">
         <div class="col-8 ">  <img src="{{ $ref['regular'] }}" alt=""></div>
-        <div class="text-center"><button href="{{ route('images') }}" type="button" class="btn btn-success btn-lg "><i class="fas fa-download"></i>Téléchargement</button>
+
+        <div class="text-center">
+            <a href="{{ route('download',['id'=>$id])}}">
+            <button type="button" class="btn btn-success btn-lg "><i class="fas fa-download"></i>Téléchargement</button>
+        </a>
         </div>
       </div>
     </div>
@@ -21,7 +31,7 @@
                         <a href="{{$key['id']}}">
                             <img src="{{ $key['urls']['regular']}}" data-target="#indicators" data-slide-to="1" alt="" />
                          </a>
-                       
+
                     </div>
                 </div>
                 @endforeach
@@ -29,4 +39,5 @@
         </div><!-- end container-fluid -->
     </div>
 </div>
+
 @endsection
